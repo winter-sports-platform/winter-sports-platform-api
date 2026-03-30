@@ -1,0 +1,13 @@
+package com.wintersports.winter_sports_api;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class WinterSportsApiApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(WinterSportsApiApplication.class, args);
+	}
+
+}
