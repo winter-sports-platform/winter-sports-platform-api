@@ -1,0 +1,1 @@
+# winter-sports-platform-api
