@@ -1,4 +1,4 @@
-package com.wintersports.winter_sports_api;
+package com.wintersports;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
