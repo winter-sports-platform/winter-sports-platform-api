@@ -5,9 +5,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "health")
+@Table(name = "tournament_types")
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Health extends BaseEntity {
-    private String status;
+public class TournamentType extends BaseEntity {
+
+    @Column(nullable = false, unique = true)
+    private String name;
 }

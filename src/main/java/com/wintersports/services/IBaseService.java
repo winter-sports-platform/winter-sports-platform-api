@@ -2,14 +2,10 @@ package com.wintersports.services;
 
 import java.util.List;
 
-public interface IBaseService<T, ID> {
-    List<T> getAll();
-
-    T getById(ID id);
-
-    T create(T entity);
-
-    T update(ID id, T entity);
-
+public interface IBaseService<TResponse, TCreateRequest, TUpdateRequest, ID> {
+    List<TResponse> getAll();
+    TResponse getById(ID id);
+    TResponse create(TCreateRequest request);
+    TResponse update(ID id, TUpdateRequest request);
     void delete(ID id);
 }
