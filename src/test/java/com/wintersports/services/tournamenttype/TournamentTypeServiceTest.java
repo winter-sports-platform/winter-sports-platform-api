@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +25,9 @@ class TournamentTypeServiceTest {
     @Mock
     private ITournamentTypeRepository tournamentTypeRepository;
 
+    @Mock
+    private ModelMapper modelMapper;
+
     @InjectMocks
     private TournamentTypeService tournamentTypeService;
 
@@ -33,7 +37,12 @@ class TournamentTypeServiceTest {
         type.setId(1L);
         type.setName("Olympics");
 
+        TournamentTypeResponse response = new TournamentTypeResponse();
+        response.setId(1L);
+        response.setName("Olympics");
+
         when(tournamentTypeRepository.findAll()).thenReturn(List.of(type));
+        when(modelMapper.map(type, TournamentTypeResponse.class)).thenReturn(response);
 
         List<TournamentTypeResponse> result = tournamentTypeService.getAll();
 
@@ -48,7 +57,12 @@ class TournamentTypeServiceTest {
         type.setId(1L);
         type.setName("Olympics");
 
+        TournamentTypeResponse response = new TournamentTypeResponse();
+        response.setId(1L);
+        response.setName("Olympics");
+
         when(tournamentTypeRepository.findById(1L)).thenReturn(Optional.of(type));
+        when(modelMapper.map(type, TournamentTypeResponse.class)).thenReturn(response);
 
         TournamentTypeResponse result = tournamentTypeService.getById(1L);
 
@@ -71,8 +85,13 @@ class TournamentTypeServiceTest {
         saved.setId(1L);
         saved.setName("Olympics");
 
+        TournamentTypeResponse response = new TournamentTypeResponse();
+        response.setId(1L);
+        response.setName("Olympics");
+
         when(tournamentTypeRepository.existsByName("Olympics")).thenReturn(false);
         when(tournamentTypeRepository.save(any())).thenReturn(saved);
+        when(modelMapper.map(saved, TournamentTypeResponse.class)).thenReturn(response);
 
         TournamentTypeResponse result = tournamentTypeService.create(request);
 
