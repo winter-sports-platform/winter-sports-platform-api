@@ -3,7 +3,6 @@ package com.wintersports.services.tournament;
 import com.wintersports.dtos.requests.CreateTournamentRequest;
 import com.wintersports.dtos.responses.TournamentResponse;
 import com.wintersports.entities.Tournament;
-import com.wintersports.entities.TournamentType;
 import com.wintersports.exceptions.DuplicateResourceException.DuplicateResourceException;
 import com.wintersports.exceptions.ResourceNotFoundException.ResourceNotFoundException;
 import com.wintersports.repositories.tournament.ITournamentRepository;
@@ -15,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
