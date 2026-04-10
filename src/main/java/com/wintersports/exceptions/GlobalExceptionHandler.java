@@ -1,6 +1,7 @@
 package com.wintersports.exceptions;
 
 import com.wintersports.exceptions.DuplicateResourceException.DuplicateResourceException;
+import com.wintersports.exceptions.InvalidCompetitionDateException.InvalidCompetitionDateException;
 import com.wintersports.exceptions.InvalidRegistrationException.InvalidRegistrationException;
 import com.wintersports.exceptions.RegistrationClosedException.RegistrationClosedException;
 import com.wintersports.exceptions.ResourceNotFoundException.ResourceNotFoundException;
@@ -59,6 +60,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<Map<String, String>> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
         return ResponseEntity.status(400).body(Map.of("message", "Invalid id format"));
+    }
+
+    // 400 - Competition date is outside tournament date range
+    @ExceptionHandler(InvalidCompetitionDateException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidCompetitionDate(InvalidCompetitionDateException ex) {
+        return ResponseEntity.status(400).body(Map.of("message", ex.getMessage()));
     }
 
     // 500 - Unexpected server error
