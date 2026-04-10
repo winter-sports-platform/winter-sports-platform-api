@@ -90,6 +90,7 @@ class TournamentTypeServiceTest {
         response.setName("Olympics");
 
         when(tournamentTypeRepository.existsByName("Olympics")).thenReturn(false);
+        when(modelMapper.map(request, TournamentType.class)).thenReturn(saved);
         when(tournamentTypeRepository.save(any())).thenReturn(saved);
         when(modelMapper.map(saved, TournamentTypeResponse.class)).thenReturn(response);
 
