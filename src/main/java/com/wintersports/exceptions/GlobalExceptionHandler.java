@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +53,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleDuplicate(
             DuplicateResourceException ex) {
         return ResponseEntity.status(409).body(Map.of("message", ex.getMessage()));
+    }
+
+    // 400 - Invalid path variable type (e.g. /api/tournaments/test instead of /api/tournaments/1)
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<Map<String, String>> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        return ResponseEntity.status(400).body(Map.of("message", "Invalid id format"));
     }
 
     // 500 - Unexpected server error

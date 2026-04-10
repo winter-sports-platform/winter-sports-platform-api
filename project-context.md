@@ -25,7 +25,7 @@
 
 ## Completed Modules
 - TournamentType ✅
-- Tournament (in progress 🔄)
+- Tournament ✅
 
 ## Remaining Modules
 - Competition (SlalomCompetition, BiathlonCompetition)
@@ -34,3 +34,9 @@
 - CompetitionResult (SlalomResult, BiathlonResult)
 - Medal
 - JWT Security
+
+## Key Technical Decisions
+- ModelMapper с STRICT matching strategy
+- ModelMapperConfig.mapList() - static method
+- create — mapping for entity + ModelMapper only for response
+- update — modelMapper.map(request, entity) for update the fields
