@@ -15,6 +15,7 @@
 - dtos/responses/ → response DTOs
 - exceptions/{ExceptionName}/ → custom exceptions
 - aspects/ → AOP logging
+- enums/ → Gender and other enums
 
 ## Conventions
 - Repositories: I prefix (IBaseRepository, ITournamentRepository)
@@ -26,17 +27,30 @@
 ## Completed Modules
 - TournamentType ✅
 - Tournament ✅
+- Competition (SlalomCompetition, BiathlonCompetition) ✅
 
 ## Remaining Modules
 - Competition (SlalomCompetition, BiathlonCompetition)
 - Athlete + User
 - Registration
-- CompetitionResult (SlalomResult, BiathlonResult)
 - Medal
 - JWT Security
 
 ## Key Technical Decisions
-- ModelMapper с STRICT matching strategy
-- ModelMapperConfig.mapList() - static method
-- create — mapping for entity + ModelMapper only for response
-- update — modelMapper.map(request, entity) for update the fields
+- ModelMapper with STRICT matching strategy (to avoid FK fields being mapped to id)
+- ModelMapperConfig.mapList() as a static method accepting ModelMapper as parameter
+- create — manual entity mapping + ModelMapper only for response (avoids ObjectOptimisticLockingFailureException)
+- update — modelMapper.map(request, entity) to update existing entity fields
+- Gender as enum in enums/ package with @Enumerated(EnumType.STRING)
+- CompetitionService handles getAll/getById/delete for all competition types
+- SlalomCompetitionService and BiathlonCompetitionService handle only create/update
+- Single CompetitionController for all competition endpoints
+- InvalidCompetitionDateException — validates competition date is within tournament start/end dates
+- All custom exceptions extend RuntimeException and live in exceptions/{ExceptionName}/ packages
+- GlobalExceptionHandler (@RestControllerAdvice) handles 400/404/409/500
+
+## Testing Conventions
+- Unit tests only for service layer
+- Mockito + JUnit 5
+- @ExtendWith(MockitoExtension.class)
+- Mock ModelMapper in every service test
