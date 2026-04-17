@@ -11,6 +11,7 @@ import com.wintersports.services.competition.ISlalomCompetitionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,18 +36,21 @@ public class CompetitionController {
     }
 
     @PostMapping("/slalom")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<SlalomCompetitionResponse> createSlalom(
             @Valid @RequestBody CreateSlalomCompetitionRequest request) {
         return ResponseEntity.status(201).body(slalomCompetitionService.create(request));
     }
 
     @PostMapping("/biathlon")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<BiathlonCompetitionResponse> createBiathlon(
             @Valid @RequestBody CreateBiathlonCompetitionRequest request) {
         return ResponseEntity.status(201).body(biathlonCompetitionService.create(request));
     }
 
     @PutMapping("/slalom/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<SlalomCompetitionResponse> updateSlalom(
             @PathVariable Long id,
             @Valid @RequestBody CreateSlalomCompetitionRequest request) {
@@ -54,6 +58,7 @@ public class CompetitionController {
     }
 
     @PutMapping("/biathlon/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<BiathlonCompetitionResponse> updateBiathlon(
             @PathVariable Long id,
             @Valid @RequestBody CreateBiathlonCompetitionRequest request) {
@@ -61,6 +66,7 @@ public class CompetitionController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         competitionService.delete(id);
         return ResponseEntity.noContent().build();

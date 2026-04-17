@@ -1,7 +1,8 @@
 ## Endpoints & Roles
 
 ### Auth
-- POST /api/auth/register → Public
+- POST /api/auth/register/athlete → Public
+- POST /api/auth/register/admin → ADMIN
 - POST /api/auth/login → Public
 
 ### Tournament Types
@@ -28,7 +29,6 @@
 ### Athletes
 - GET /api/athletes → Public
 - GET /api/athletes/{id} → Public
-- POST /api/athletes → Public (registration)
 - PUT /api/athletes/{id} → ATHLETE (own profile)
 - DELETE /api/athletes/{id} → ADMIN
 
