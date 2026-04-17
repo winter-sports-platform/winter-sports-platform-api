@@ -34,11 +34,11 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run tests
-        run: ./gradlew test --info
+        run: ./gradlew test
         env:
-          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/winter_sports
-          SPRING_DATASOURCE_USERNAME: root
-          SPRING_DATASOURCE_PASSWORD: root
+#          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/winter_sports
+#          SPRING_DATASOURCE_USERNAME: root
+#          SPRING_DATASOURCE_PASSWORD: root
           JWT_SECRET: zV3kP9mQ2nX8wL5rT1yA6dF0jH4bE7cU
           JWT_EXPIRATION: 86400000
 
