@@ -1,5 +1,7 @@
-package com.wintersports.entities;
+package com.wintersports.entities.result;
 
+import com.wintersports.entities.AthleteProfile;
+import com.wintersports.entities.BaseEntity;
 import com.wintersports.entities.competition.Competition;
 import jakarta.persistence.*;
 import lombok.Data;

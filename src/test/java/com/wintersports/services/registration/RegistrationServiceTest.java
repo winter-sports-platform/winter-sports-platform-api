@@ -2,6 +2,8 @@ package com.wintersports.services.registration;
 
 import com.wintersports.dtos.requests.CreateRegistrationRequest;
 import com.wintersports.dtos.requests.UpdateRegistrationStatusRequest;
+import com.wintersports.dtos.responses.AthleteProfileResponse;
+import com.wintersports.dtos.responses.RegistrationItemResponse;
 import com.wintersports.dtos.responses.RegistrationResponse;
 import com.wintersports.entities.AthleteProfile;
 import com.wintersports.entities.Registration;
@@ -84,7 +86,10 @@ class RegistrationServiceTest {
     @Test
     void getAll_success() {
         when(registrationRepository.findAll()).thenReturn(List.of(registration));
-        when(modelMapper.map(any(), eq(RegistrationResponse.class))).thenReturn(new RegistrationResponse());
+        when(modelMapper.map(any(AthleteProfile.class), eq(AthleteProfileResponse.class)))
+                .thenReturn(new AthleteProfileResponse());
+        when(modelMapper.map(any(Registration.class), eq(RegistrationItemResponse.class)))
+                .thenReturn(new RegistrationItemResponse());
 
         List<RegistrationResponse> result = registrationService.getAll();
 

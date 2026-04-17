@@ -1,4 +1,4 @@
-package com.wintersports.entities;
+package com.wintersports.entities.result;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
