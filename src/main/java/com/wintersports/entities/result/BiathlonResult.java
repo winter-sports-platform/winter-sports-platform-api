@@ -2,6 +2,7 @@ package com.wintersports.entities.result;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,6 +11,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "biathlon_results")
+@PrimaryKeyJoinColumn(name = "result_id")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class BiathlonResult extends CompetitionResult {

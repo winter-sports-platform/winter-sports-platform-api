@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "slalom_results")
+@PrimaryKeyJoinColumn(name = "result_id")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class SlalomResult extends CompetitionResult {
