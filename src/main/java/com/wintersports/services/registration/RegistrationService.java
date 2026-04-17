@@ -3,6 +3,8 @@ package com.wintersports.services.registration;
 import com.wintersports.configs.ModelMapperConfig;
 import com.wintersports.dtos.requests.CreateRegistrationRequest;
 import com.wintersports.dtos.requests.UpdateRegistrationStatusRequest;
+import com.wintersports.dtos.responses.AthleteProfileResponse;
+import com.wintersports.dtos.responses.RegistrationItemResponse;
 import com.wintersports.dtos.responses.RegistrationResponse;
 import com.wintersports.entities.AthleteProfile;
 import com.wintersports.entities.Registration;
@@ -24,6 +26,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,11 +39,22 @@ public class RegistrationService implements IRegistrationService {
 
     @Override
     public List<RegistrationResponse> getAll() {
-        return ModelMapperConfig.mapList(
-                registrationRepository.findAll(),
-                RegistrationResponse.class,
-                modelMapper
-        );
+        return registrationRepository.findAll()
+                .stream()
+                .collect(Collectors.groupingBy(Registration::getAthleteProfile))
+                .entrySet()
+                .stream()
+                .map(entry -> {
+                    RegistrationResponse response = new RegistrationResponse();
+                    response.setAthleteProfile(modelMapper.map(entry.getKey(), AthleteProfileResponse.class));
+                    response.setRegistrations(ModelMapperConfig.mapList(
+                            entry.getValue(),
+                            RegistrationItemResponse.class,
+                            modelMapper
+                    ));
+                    return response;
+                })
+                .toList();
     }
 
     @Override

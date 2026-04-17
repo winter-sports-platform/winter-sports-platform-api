@@ -7,6 +7,7 @@ import com.wintersports.entities.AthleteProfile;
 import com.wintersports.exceptions.ResourceNotFoundException.ResourceNotFoundException;
 import com.wintersports.exceptions.UnauthorizedAccessException.UnauthorizedAccessException;
 import com.wintersports.repositories.athleteprofile.IAthleteProfileRepository;
+import com.wintersports.repositories.user.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +20,7 @@ import java.util.List;
 public class AthleteProfileService implements IAthleteProfileService {
 
     private final IAthleteProfileRepository athleteProfileRepository;
+    private final IUserRepository userRepository;
     private final ModelMapper modelMapper;
 
     @Override
@@ -55,9 +57,11 @@ public class AthleteProfileService implements IAthleteProfileService {
     @Override
     public void delete(Long id) {
         //Check if athlete exist
-        findById(id);
+        AthleteProfile entity = findById(id);
 
+        Long userId = entity.getUser().getId();
         athleteProfileRepository.deleteById(id);
+        userRepository.deleteById(userId);
     }
 
     private AthleteProfile findById(Long id) {

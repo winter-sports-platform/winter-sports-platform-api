@@ -6,6 +6,7 @@ import com.wintersports.services.tournament.TournamentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,12 +28,14 @@ public class TournamentController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<TournamentResponse> create(
             @Valid @RequestBody CreateTournamentRequest request) {
         return ResponseEntity.status(201).body(tournamentService.create(request));
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<TournamentResponse> update(
             @PathVariable Long id,
             @Valid @RequestBody CreateTournamentRequest request) {
@@ -40,6 +43,7 @@ public class TournamentController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         tournamentService.delete(id);
         return ResponseEntity.noContent().build();

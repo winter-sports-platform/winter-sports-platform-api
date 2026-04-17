@@ -1,14 +1,10 @@
 package com.wintersports.dtos.responses;
 
 import lombok.Data;
-
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class RegistrationResponse {
-    private Long id;
     private AthleteProfileResponse athleteProfile;
-    private CompetitionResponse competition;
-    private LocalDateTime registeredAt;
-    private String status;
+    private List<RegistrationItemResponse> registrations;
 }
