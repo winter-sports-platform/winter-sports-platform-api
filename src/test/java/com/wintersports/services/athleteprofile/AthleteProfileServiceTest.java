@@ -8,6 +8,7 @@ import com.wintersports.enums.Gender;
 import com.wintersports.exceptions.ResourceNotFoundException.ResourceNotFoundException;
 import com.wintersports.exceptions.UnauthorizedAccessException.UnauthorizedAccessException;
 import com.wintersports.repositories.athleteprofile.IAthleteProfileRepository;
+import com.wintersports.repositories.user.IUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,6 +37,9 @@ class AthleteProfileServiceTest {
 
     @Mock
     private ModelMapper modelMapper;
+
+    @Mock
+    private IUserRepository userRepository;
 
     @InjectMocks
     private AthleteProfileService athleteProfileService;
@@ -139,6 +143,7 @@ class AthleteProfileServiceTest {
     @Test
     void delete_success() {
         when(athleteProfileRepository.findById(1L)).thenReturn(Optional.of(athleteProfile));
+        doNothing().when(userRepository).deleteById(any());
 
         assertDoesNotThrow(() -> athleteProfileService.delete(1L));
         verify(athleteProfileRepository, times(1)).deleteById(1L);
