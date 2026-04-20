@@ -10,6 +10,4 @@ public class UpdateSlalomResultRequest {
 
     @Positive(message = "Run 2 time must be positive")
     private BigDecimal run2Time;
-
-    private boolean finished;
 }

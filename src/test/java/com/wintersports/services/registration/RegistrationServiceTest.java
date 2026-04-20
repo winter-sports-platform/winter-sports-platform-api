@@ -198,9 +198,9 @@ class RegistrationServiceTest {
 
         when(registrationRepository.findById(1L)).thenReturn(Optional.of(registration));
         when(registrationRepository.save(any())).thenReturn(registration);
-        when(modelMapper.map(any(), eq(RegistrationResponse.class))).thenReturn(new RegistrationResponse());
+        when(modelMapper.map(any(Registration.class), eq(RegistrationItemResponse.class))).thenReturn(new RegistrationItemResponse());
 
-        RegistrationResponse result = registrationService.updateStatus(1L, request);
+        RegistrationItemResponse result = registrationService.updateStatus(1L, request);
 
         assertNotNull(result);
         assertEquals(RegistrationStatus.APPROVED, registration.getStatus());
