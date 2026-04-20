@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class RegistrationItemResponse {
     private Long id;
+    private AthleteProfileResponse athleteProfile;
     private CompetitionResponse competition;
     private LocalDateTime registeredAt;
     private RegistrationStatus status;

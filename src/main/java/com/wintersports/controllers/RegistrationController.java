@@ -2,6 +2,7 @@ package com.wintersports.controllers;
 
 import com.wintersports.dtos.requests.CreateRegistrationRequest;
 import com.wintersports.dtos.requests.UpdateRegistrationStatusRequest;
+import com.wintersports.dtos.responses.RegistrationItemResponse;
 import com.wintersports.dtos.responses.RegistrationResponse;
 import com.wintersports.services.registration.RegistrationService;
 import jakarta.validation.Valid;
@@ -34,7 +35,7 @@ public class RegistrationController {
 
     @PutMapping("/{id}/status")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<RegistrationResponse> updateStatus(
+    public ResponseEntity<RegistrationItemResponse> updateStatus(
             @PathVariable Long id,
             @Valid @RequestBody UpdateRegistrationStatusRequest request) {
         return ResponseEntity.ok(registrationService.updateStatus(id, request));

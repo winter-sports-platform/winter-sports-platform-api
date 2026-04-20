@@ -10,7 +10,6 @@ import com.wintersports.entities.AthleteProfile;
 import com.wintersports.entities.Registration;
 import com.wintersports.entities.competition.Competition;
 import com.wintersports.enums.RegistrationStatus;
-import com.wintersports.enums.UserStatus;
 import com.wintersports.exceptions.DuplicateResourceException.DuplicateResourceException;
 import com.wintersports.exceptions.InvalidRegistrationException.InvalidRegistrationException;
 import com.wintersports.exceptions.RegistrationClosedException.RegistrationClosedException;
@@ -94,13 +93,13 @@ public class RegistrationService implements IRegistrationService {
     }
 
     @Override
-    public RegistrationResponse updateStatus(Long id, UpdateRegistrationStatusRequest request) {
+    public RegistrationItemResponse updateStatus(Long id, UpdateRegistrationStatusRequest request) {
         Registration registration = registrationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Registration with id " + id + " not found"));
 
         registration.setStatus(request.getStatus());
 
-        return modelMapper.map(registrationRepository.save(registration), RegistrationResponse.class);
+        return modelMapper.map(registrationRepository.save(registration), RegistrationItemResponse.class);
     }
 
     @Override
