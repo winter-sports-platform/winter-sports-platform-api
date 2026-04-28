@@ -34,7 +34,7 @@
 - Tournament ✅
 - Competition (SlalomCompetition, BiathlonCompetition) ✅
 - CI/CD pipeline ✅
-- Unit тестове (53 теста) ✅
+- Unit тестове (84 теста) ✅
 - GlobalExceptionHandler ✅
 - ModelMapper конфигурация ✅
 - JWT Security ✅
