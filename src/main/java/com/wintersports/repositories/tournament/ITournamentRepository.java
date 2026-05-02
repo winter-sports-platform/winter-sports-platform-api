@@ -5,4 +5,6 @@ import com.wintersports.repositories.IBaseRepository;
 
 public interface ITournamentRepository extends IBaseRepository<Tournament, Long> {
     boolean existsByName(String name);
+
+    boolean existsByNameAndIdNot(String name, Long id);
 }

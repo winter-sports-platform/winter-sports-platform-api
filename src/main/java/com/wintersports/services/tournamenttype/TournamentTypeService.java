@@ -46,6 +46,11 @@ public class TournamentTypeService implements ITournamentTypeService {
     @Override
     public TournamentTypeResponse update(Long id, CreateTournamentTypeRequest request) {
         TournamentType entity = findById(id);
+
+        if (tournamentTypeRepository.existsByNameAndIdNot(request.getName(), id)) {
+            throw new DuplicateResourceException("Tournament type with name '" + request.getName() + "' already exists");
+        }
+
         modelMapper.map(request, entity);
         return modelMapper.map(tournamentTypeRepository.save(entity), TournamentTypeResponse.class);
     }

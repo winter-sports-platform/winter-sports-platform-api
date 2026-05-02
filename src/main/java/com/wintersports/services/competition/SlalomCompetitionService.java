@@ -48,6 +48,10 @@ public class SlalomCompetitionService implements ISlalomCompetitionService {
         SlalomCompetition entity = slalomCompetitionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("SlalomCompetition with id " + id + " not found"));
 
+        if (competitionRepository.existsByNameAndTournamentIdAndIdNot(request.getName(), request.getTournamentId(), id)) {
+            throw new DuplicateResourceException("Competition with name '" + request.getName() + "' already exists in this tournament");
+        }
+
         Tournament tournament = tournamentRepository.findById(request.getTournamentId())
                 .orElseThrow(() -> new ResourceNotFoundException("Tournament with id " + request.getTournamentId() + " not found"));
 

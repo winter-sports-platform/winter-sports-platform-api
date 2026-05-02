@@ -55,7 +55,7 @@ public class TournamentService implements ITournamentService {
     public TournamentResponse update(Long id, CreateTournamentRequest request) {
         Tournament entity = findById(id);
 
-        if (tournamentRepository.existsByName(request.getName())) {
+        if (tournamentRepository.existsByNameAndIdNot(request.getName(), id)) {
             throw new DuplicateResourceException("Tournament with name '" + request.getName() + "' already exists");
         }
 
