@@ -44,7 +44,8 @@ public class AuthService implements IAuthService {
         AthleteProfile athleteProfile = toAthleteProfileEntity(request, user);
         athleteProfileRepository.save(athleteProfile);
 
-        return new AuthResponse(jwtService.generateToken(user.getUsername(), user.getRole().name()));
+        return new AuthResponse(jwtService.generateToken(
+                user.getUsername(), user.getRole().name(), athleteProfile.getId()));
     }
 
     @Override
@@ -60,7 +61,8 @@ public class AuthService implements IAuthService {
         User user = toUserEntity(request.getUsername(), request.getEmail(), request.getPassword(), Role.ADMIN);
         userRepository.save(user);
 
-        return new AuthResponse(jwtService.generateToken(user.getUsername(), user.getRole().name()));
+        return new AuthResponse(jwtService.generateToken(
+                user.getUsername(), user.getRole().name(), null));
     }
 
     @Override
@@ -80,7 +82,16 @@ public class AuthService implements IAuthService {
             throw new AccountNotApprovedException("Your account has been rejected");
         }
 
-        return new AuthResponse(jwtService.generateToken(user.getUsername(), user.getRole().name()));
+        Long athleteProfileId = null;
+        if (user.getRole() == Role.ATHLETE) {
+            athleteProfileId = athleteProfileRepository
+                    .findByUserUsername(user.getUsername())
+                    .map(AthleteProfile::getId)
+                    .orElse(null);
+        }
+
+        return new AuthResponse(jwtService.generateToken(
+                user.getUsername(), user.getRole().name(), athleteProfileId));
     }
 
     private User toUserEntity(String username, String email, String password, Role role) {

@@ -108,4 +108,27 @@ public class RegistrationService implements IRegistrationService {
                 .orElseThrow(() -> new ResourceNotFoundException("Registration with id " + id + " not found"));
         registrationRepository.deleteById(id);
     }
+
+    @Override
+    public List<RegistrationItemResponse> getByCompetition(Long competitionId) {
+        return registrationRepository.findByCompetitionId(competitionId)
+                .stream()
+                .map(r -> modelMapper.map(r, RegistrationItemResponse.class))
+                .toList();
+    }
+
+    @Override
+    public RegistrationResponse getMyRegistrations() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        AthleteProfile athleteProfile = athleteProfileRepository.findByUserUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("AthleteProfile not found"));
+
+        List<Registration> registrations = registrationRepository.findByAthleteProfileId(athleteProfile.getId());
+
+        RegistrationResponse response = new RegistrationResponse();
+        response.setAthleteProfile(modelMapper.map(athleteProfile, AthleteProfileResponse.class));
+        response.setRegistrations(ModelMapperConfig.mapList(registrations, RegistrationItemResponse.class, modelMapper));
+        return response;
+    }
 }
