@@ -47,4 +47,16 @@ public class RegistrationController {
         registrationService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/competition/{competitionId}")
+    public ResponseEntity<List<RegistrationItemResponse>> getByCompetition(
+            @PathVariable Long competitionId) {
+        return ResponseEntity.ok(registrationService.getByCompetition(competitionId));
+    }
+
+    @GetMapping("/my")
+    @PreAuthorize("hasRole('ATHLETE')")
+    public ResponseEntity<RegistrationResponse> getMyRegistrations() {
+        return ResponseEntity.ok(registrationService.getMyRegistrations());
+    }
 }

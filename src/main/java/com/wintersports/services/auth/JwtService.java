@@ -18,14 +18,19 @@ public class JwtService {
     @Value("${jwt.expiration}")
     private long expiration;
 
-    public String generateToken(String username, String role) {
-        return Jwts.builder()
+    public String generateToken(String username, String role, Long athleteProfileId) {
+        var builder = Jwts.builder()
                 .subject(username)
                 .claim("role", role)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(getSigningKey())
-                .compact();
+                .signWith(getSigningKey());
+
+        if (athleteProfileId != null) {
+            builder.claim("athleteProfileId", athleteProfileId);
+        }
+
+        return builder.compact();
     }
 
     public String extractUsername(String token) {

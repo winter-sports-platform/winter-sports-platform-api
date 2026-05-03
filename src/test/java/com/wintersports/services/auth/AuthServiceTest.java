@@ -84,7 +84,7 @@ class AuthServiceTest {
         when(passwordEncoder.encode(any())).thenReturn("encoded_password");
         when(userRepository.save(any())).thenReturn(user);
         when(athleteProfileRepository.save(any())).thenReturn(new AthleteProfile());
-        when(jwtService.generateToken(any(), any())).thenReturn("token");
+        when(jwtService.generateToken(any(), any(), any())).thenReturn("token");
         when(modelMapper.map(any(), eq(AthleteProfile.class))).thenReturn(new AthleteProfile());
 
         AuthResponse response = authService.registerAthlete(registerRequest);
@@ -112,7 +112,7 @@ class AuthServiceTest {
     void login_success() {
         when(userRepository.findByUsername(loginRequest.getUsername())).thenReturn(Optional.of(user));
         when(passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())).thenReturn(true);
-        when(jwtService.generateToken(any(), any())).thenReturn("token");
+        when(jwtService.generateToken(any(), any(), any())).thenReturn("token");
 
         AuthResponse response = authService.login(loginRequest);
 

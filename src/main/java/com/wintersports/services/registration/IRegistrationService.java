@@ -12,4 +12,6 @@ public interface IRegistrationService {
     RegistrationResponse create(CreateRegistrationRequest request);
     RegistrationItemResponse updateStatus(Long id, UpdateRegistrationStatusRequest request);
     void delete(Long id);
+    List<RegistrationItemResponse> getByCompetition(Long competitionId);
+    RegistrationResponse getMyRegistrations();
 }
