@@ -6,9 +6,11 @@ import com.wintersports.entities.Tournament;
 import com.wintersports.entities.competition.SlalomCompetition;
 import com.wintersports.exceptions.DuplicateResourceException.DuplicateResourceException;
 import com.wintersports.exceptions.InvalidCompetitionDateException.InvalidCompetitionDateException;
+import com.wintersports.exceptions.InvalidRegistrationException.InvalidRegistrationException;
 import com.wintersports.exceptions.ResourceNotFoundException.ResourceNotFoundException;
 import com.wintersports.repositories.competition.ICompetitionRepository;
 import com.wintersports.repositories.competition.ISlalomCompetitionRepository;
+import com.wintersports.repositories.result.ICompetitionResultRepository;
 import com.wintersports.repositories.tournament.ITournamentRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -21,6 +23,7 @@ public class SlalomCompetitionService implements ISlalomCompetitionService {
     private final ISlalomCompetitionRepository slalomCompetitionRepository;
     private final ICompetitionRepository competitionRepository;
     private final ITournamentRepository tournamentRepository;
+    private final ICompetitionResultRepository competitionResultRepository;
     private final ModelMapper modelMapper;
 
     @Override
@@ -54,6 +57,10 @@ public class SlalomCompetitionService implements ISlalomCompetitionService {
 
         Tournament tournament = tournamentRepository.findById(request.getTournamentId())
                 .orElseThrow(() -> new ResourceNotFoundException("Tournament with id " + request.getTournamentId() + " not found"));
+
+        if (competitionResultRepository.existsByCompetitionId(entity.getId())) {
+            throw new InvalidRegistrationException("Cannot update competition — results have already been entered");
+        }
 
         if (request.getDate().isBefore(tournament.getStartDate()) ||
                 request.getDate().isAfter(tournament.getEndDate())) {

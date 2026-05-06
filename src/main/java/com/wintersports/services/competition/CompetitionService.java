@@ -24,11 +24,17 @@ public class CompetitionService implements ICompetitionService {
 
     @Override
     public List<CompetitionResponse> getAll() {
-        return ModelMapperConfig.mapList(
-                competitionRepository.findAll(),
-                CompetitionResponse.class,
-                modelMapper
-        );
+        return competitionRepository.findAll()
+                .stream()
+                .map(competition -> {
+                    if (competition instanceof SlalomCompetition) {
+                        return (CompetitionResponse) modelMapper.map(competition, SlalomCompetitionResponse.class);
+                    } else if (competition instanceof BiathlonCompetition) {
+                        return (CompetitionResponse) modelMapper.map(competition, BiathlonCompetitionResponse.class);
+                    }
+                    return modelMapper.map(competition, CompetitionResponse.class);
+                })
+                .toList();
     }
 
     @Override
