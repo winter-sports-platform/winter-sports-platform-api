@@ -47,6 +47,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/medals/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/rankings/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/statistics/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/registrations/competition/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex
