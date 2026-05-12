@@ -5,7 +5,10 @@ import com.wintersports.dtos.responses.MedalCountryResponse;
 import com.wintersports.dtos.responses.MedalResponse;
 import com.wintersports.entities.Medal;
 import com.wintersports.entities.competition.Competition;
+import com.wintersports.entities.result.BiathlonResult;
 import com.wintersports.entities.result.CompetitionResult;
+import com.wintersports.entities.result.SlalomResult;
+import com.wintersports.enums.MedalType;
 import com.wintersports.exceptions.DuplicateResourceException.DuplicateResourceException;
 import com.wintersports.exceptions.ResourceNotFoundException.ResourceNotFoundException;
 import com.wintersports.repositories.medal.IMedalRepository;
@@ -15,8 +18,9 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -79,6 +83,43 @@ public class MedalService implements IMedalService {
         medal.setType(request.getType());
 
         return modelMapper.map(medalRepository.save(medal), MedalResponse.class);
+    }
+
+    @Override
+    public List<MedalResponse> autoAssignAll(Long competitionId) {
+        if (!competitionRepository.existsById(competitionId)) {
+            throw new ResourceNotFoundException("Competition with id " + competitionId + " not found");
+        }
+
+        if (medalRepository.existsByCompetitionId(competitionId)) {
+            throw new DuplicateResourceException("Medals have already been assigned for this competition");
+        }
+
+        List<CompetitionResult> rankings = competitionResultRepository
+                .findByCompetitionId(competitionId)
+                .stream()
+                .filter(CompetitionResult::isFinished)
+                .sorted(Comparator.comparing(r -> {
+                    if (r instanceof SlalomResult s) return s.getTotalTime() != null ? s.getTotalTime() : new BigDecimal(Integer.MAX_VALUE);
+                    if (r instanceof BiathlonResult b) return b.getTotalTime();
+                    return new BigDecimal(Integer.MAX_VALUE);
+                }))
+                .toList();
+
+        MedalType[] types = {MedalType.GOLD, MedalType.SILVER, MedalType.BRONZE};
+        List<Medal> medals = new java.util.ArrayList<>();
+
+        for (int i = 0; i < Math.min(rankings.size(), 3); i++) {
+            Medal medal = new Medal();
+            medal.setResult(rankings.get(i));
+            medal.setCompetition(rankings.get(i).getCompetition());
+            medal.setType(types[i]);
+            medals.add(medalRepository.save(medal));
+        }
+
+        return medals.stream()
+                .map(m -> modelMapper.map(m, MedalResponse.class))
+                .toList();
     }
 
     @Override

@@ -1,0 +1,79 @@
+2026-05-13T00:13:07.503+03:00  INFO 33380 --- [winter-sports-api] [main] c.w.WinterSportsApiApplication           : Starting WinterSportsApiApplication using Java 21.0.10 with PID 33380 (C:\Users\Kovachev\Desktop\winter-sports-platform-api\build\classes\java\main started by Kovachev in C:\Users\Kovachev\Desktop\winter-sports-platform-api)
+2026-05-13T00:13:07.505+03:00 DEBUG 33380 --- [winter-sports-api] [main] c.w.WinterSportsApiApplication           : Running with Spring Boot v4.0.5, Spring v7.0.6
+2026-05-13T00:13:07.505+03:00  INFO 33380 --- [winter-sports-api] [main] c.w.WinterSportsApiApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-05-13T00:13:07.888+03:00  INFO 33380 --- [winter-sports-api] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-13T00:13:07.941+03:00  INFO 33380 --- [winter-sports-api] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 12 JPA repository interfaces.
+2026-05-13T00:13:08.366+03:00  INFO 33380 --- [winter-sports-api] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-05-13T00:13:08.373+03:00  INFO 33380 --- [winter-sports-api] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-13T00:13:08.373+03:00  INFO 33380 --- [winter-sports-api] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-05-13T00:13:08.400+03:00  INFO 33380 --- [winter-sports-api] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 867 ms
+2026-05-13T00:13:08.453+03:00 DEBUG 33380 --- [winter-sports-api] [main] c.w.filters.JwtAuthenticationFilter      : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-13T00:13:08.560+03:00  INFO 33380 --- [winter-sports-api] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-13T00:13:08.598+03:00  INFO 33380 --- [winter-sports-api] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-05-13T00:13:08.847+03:00  INFO 33380 --- [winter-sports-api] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-13T00:13:08.866+03:00  INFO 33380 --- [winter-sports-api] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-13T00:13:09.036+03:00  INFO 33380 --- [winter-sports-api] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@33f81280
+2026-05-13T00:13:09.037+03:00  INFO 33380 --- [winter-sports-api] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-13T00:13:09.088+03:00  INFO 33380 --- [winter-sports-api] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/winter_sports?createDatabaseIfNotExist=true&useSSL=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: winter_sports/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-13T00:13:09.781+03:00  INFO 33380 --- [winter-sports-api] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-13T00:13:09.834+03:00  INFO 33380 --- [winter-sports-api] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-13T00:13:09.970+03:00  INFO 33380 --- [winter-sports-api] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-13T00:13:10.747+03:00  WARN 33380 --- [winter-sports-api] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-13T00:13:11.414+03:00  INFO 33380 --- [winter-sports-api] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2026-05-13T00:13:11.419+03:00  INFO 33380 --- [winter-sports-api] [main] c.w.WinterSportsApiApplication           : Started WinterSportsApiApplication in 4.182 seconds (process running for 4.538)
+2026-05-13T00:13:12.605+03:00  INFO 33380 --- [winter-sports-api] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-13T00:13:12.605+03:00  INFO 33380 --- [winter-sports-api] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-13T00:13:12.606+03:00  INFO 33380 --- [winter-sports-api] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-05-13T00:13:12.647+03:00  INFO 33380 --- [winter-sports-api] [http-nio-8081-exec-1] com.wintersports.aspects.LoggingAspect   : → [CONTROLLER] TournamentController.getById() | args: [1]
+2026-05-13T00:13:12.674+03:00 DEBUG 33380 --- [winter-sports-api] [http-nio-8081-exec-1] org.hibernate.SQL                        : 
+    select
+        t1_0.id,
+        t1_0.end_date,
+        t1_0.location,
+        t1_0.name,
+        t1_0.start_date,
+        t1_0.type_id,
+        t2_0.id,
+        t2_0.name,
+        t1_0.year 
+    from
+        tournaments t1_0 
+    join
+        tournament_types t2_0 
+            on t2_0.id=t1_0.type_id 
+    where
+        t1_0.id=?
+2026-05-13T00:13:12.730+03:00  INFO 33380 --- [winter-sports-api] [http-nio-8081-exec-1] com.wintersports.aspects.LoggingAspect   : ⏱ [SERVICE] TournamentService.getById() | executed in 83ms
+2026-05-13T00:13:12.735+03:00  INFO 33380 --- [winter-sports-api] [http-nio-8081-exec-1] com.wintersports.aspects.LoggingAspect   : ← [CONTROLLER] TournamentController.getById() | returned: ResponseEntity
+2026-05-13T00:13:42.622+03:00  INFO 33380 --- [winter-sports-api] [http-nio-8081-exec-6] com.wintersports.aspects.LoggingAspect   : → [CONTROLLER] TournamentController.getById() | args: [1]
+2026-05-13T00:13:42.625+03:00 DEBUG 33380 --- [winter-sports-api] [http-nio-8081-exec-6] org.hibernate.SQL                        : 
+    select
+        t1_0.id,
+        t1_0.end_date,
+        t1_0.location,
+        t1_0.name,
+        t1_0.start_date,
+        t1_0.type_id,
+        t2_0.id,
+        t2_0.name,
+        t1_0.year 
+    from
+        tournaments t1_0 
+    join
+        tournament_types t2_0 
+            on t2_0.id=t1_0.type_id 
+    where
+        t1_0.id=?
+2026-05-13T00:13:42.628+03:00  INFO 33380 --- [winter-sports-api] [http-nio-8081-exec-6] com.wintersports.aspects.LoggingAspect   : ⏱ [SERVICE] TournamentService.getById() | executed in 6ms
+2026-05-13T00:13:42.628+03:00  INFO 33380 --- [winter-sports-api] [http-nio-8081-exec-6] com.wintersports.aspects.LoggingAspect   : ← [CONTROLLER] TournamentController.getById() | returned: ResponseEntity

@@ -35,6 +35,12 @@ public class MedalController {
         return ResponseEntity.status(201).body(medalService.create(request));
     }
 
+    @PostMapping("/auto-assign/{competitionId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<MedalResponse>> autoAssign(@PathVariable Long competitionId) {
+        return ResponseEntity.status(201).body(medalService.autoAssignAll(competitionId));
+    }
+
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
